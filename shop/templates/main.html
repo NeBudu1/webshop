@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Интернет-магазин</title>
+</head>
+<body>
+<h1>{{key1}}</h1>
+<form method="get">
+    <input type="text" name="search" placeholder="Поиск">
+    <select name="category">
+        <option value="">Все категории</option>
+        {% for cat in categories %}
+            <option value="{{ cat.id }}">{{ cat.name }}</option>
+        {% endfor %}
+    </select>
+    <button>Фильтр</button>
+</form>
+
+<hr>
+
+{% for product in products %}
+    <div>
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.price }} ₸</p>
+        <p>{{ product.description }}</p>
+    </div>
+    <hr>
+{% endfor %}
+
+</body>
+</html>
