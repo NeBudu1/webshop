@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Корзина – {{ key1 }}{% endblock %}
+
+{% block content %}
+
+<section class="products-section">
+    <div class="container">
+
+        <h1 class="section-title">Ваша корзина</h1>
+
+        {% if products %}
+        <div class="cart-wrapper">
+
+            {% for product in products %}
+            <div class="cart-item">
+
+                <div class="cart-image">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                </div>
+
+                <div class="cart-info">
+                    <h2 class="cart-title">{{ product.name }}</h2>
+                    <p class="cart-category">Категория: <span>{{ product.categories.name }}</span></p>
+                    <p class="cart-price">Цена: {{ product.price }} ₸</p>
+                    <p class="cart-quantity">Количество: {{ product.qty }}</p>
+                    <p class="cart-total">Итого: {{ product.total_price }} ₸</p>
+
+                    <div class="cart-actions">
+                        <!-- Пример кнопок для изменения количества (можно потом сделать через формы или JS) -->
+                        <form action="{% url 'addtocart' product.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="product-btn">➕ Добавить ещё</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="cart-summary">
+                <h2>Общая стоимость: {{ total }} ₸</h2>
+                <a href="/" class="back-btn">← Продолжить покупки</a>
+                <!-- Можно добавить кнопку оформления заказа -->
+<!--
+            </div>
+
+        </div>
+        {% else %}
+        <p>Ваша корзина пуста.</p>
+        <a href="/" class="back-btn">← Вернуться к покупкам</a>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} – {{ key1 }}{% endblock %}
+
+{% block content %}
+
+<section class="products-section">
+    <div class="container">
+
+        <div class="detail-wrapper">
+
+            <div class="detail-image">
+                <img src="{{ product.image.url }}">
+            </div>
+
+            <div class="detail-info">
+                <h1 class="detail-title">{{ product.name }}</h1>
+
+                <p class="detail-category">
+                    Категория: <span>{{ product.categories.name }}</span>
+                </p>
+
+                <p class="detail-price">{{ product.price }} ₸</p>
+
+                <p class="detail-description">{{ product.description }}</p>
+
+                <div class="detail-actions">
+                    <button class="product-btn">🛒 В корзину</button>
+                    <a href="/" class="back-btn">← Назад</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

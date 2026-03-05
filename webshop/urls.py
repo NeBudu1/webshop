@@ -24,7 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('contacts', shopview),
     path('info', infoview),
-    path('', mainview)
+    path('', mainview, name = "search"),
+    path('detailpage/<int:number>', pagedetail, name = "detail"),
+    # path('categorypage/<int:number>', name = "category")
+    path('addtocart/<int:id>', addtocart, name = "addtocart"),
+    path('cart', cart, name = "cart")
+
 ]
 
 if settings.DEBUG:
