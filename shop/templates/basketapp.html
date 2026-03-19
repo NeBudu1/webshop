@@ -23,29 +23,36 @@
                     <h2 class="cart-title">{{ product.name }}</h2>
                     <p class="cart-category">Категория: <span>{{ product.categories.name }}</span></p>
                     <p class="cart-price">Цена: {{ product.price }} ₸</p>
-                    <p class="cart-quantity">Количество: {{ product.qty }}</p>
-                    <p class="cart-total">Итого: {{ product.total_price }} ₸</p>
 
                     <div class="cart-actions">
-                        <!-- Пример кнопок для изменения количества (можно потом сделать через формы или JS) -->
+
+                        <form action="{% url 'removefromcart' product.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="qty-btn minus">−</button>
+                        </form>
+
+                        <span class="qty-number">{{ product.qty }}</span>
+
                         <form action="{% url 'addtocart' product.id %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="product-btn">➕ Добавить ещё</button>
+                            <button type="submit" class="qty-btn plus">+</button>
                         </form>
+
                     </div>
 
+                    <p class="cart-total">Итого: {{ product.total_price }} ₸</p>
                 </div>
+
             </div>
             {% endfor %}
 
             <div class="cart-summary">
                 <h2>Общая стоимость: {{ total }} ₸</h2>
                 <a href="/" class="back-btn">← Продолжить покупки</a>
-                <!-- Можно добавить кнопку оформления заказа -->
-<!--
             </div>
 
         </div>
+
         {% else %}
         <p>Ваша корзина пуста.</p>
         <a href="/" class="back-btn">← Вернуться к покупкам</a>

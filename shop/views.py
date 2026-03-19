@@ -1,6 +1,6 @@
 from asyncore import readwrite
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaultfilters import length
 
 from shop.models import Products, Categories
@@ -56,6 +56,19 @@ def cart(request):
         total += product.total_price
         products.append(product)
     return render(request, "basketapp.html", {"products": products, "total": total, "key1": a})
+def remove_from_cart(request, product_id):
+    cart = request.session.get('cart', {})
+
+    product_id = str(product_id)
+
+    if product_id in cart:
+        if cart[product_id] > 1:
+            cart[product_id] -= 1
+        else:
+            del cart[product_id]
+
+    request.session['cart'] = cart
+    return redirect('cart')
 
 
 

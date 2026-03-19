@@ -28,7 +28,8 @@ urlpatterns = [
     path('detailpage/<int:number>', pagedetail, name = "detail"),
     # path('categorypage/<int:number>', name = "category")
     path('addtocart/<int:id>', addtocart, name = "addtocart"),
-    path('cart', cart, name = "cart")
+    path('cart', cart, name = "cart"),
+    path('remove/<int:product_id>/', remove_from_cart, name='removefromcart'),
 
 ]
 
